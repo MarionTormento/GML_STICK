@@ -9,7 +9,9 @@ memory_v2.py: similar code for the memory network.
 
 old versions folder: previous versions of the memory and inverted memory networks, using only a neuron class (kept for personal information).
 
-# Useful vocabulary
+# Useful vocabulary and information
+The for loop used in the computation is updated with a step of 10us corresponding to the smallest time scale of the neuron (Tneu). Thus, compTime is in us.
+
 Class Neuron():
 
         self.name = name 		# Name of the neuron
@@ -19,7 +21,7 @@ Class Neuron():
         self.updateRule = []	# List of dV_i to update the neuron potential from action time t_i to t_{i+1}
         self.nbSynapses = 0		# Number of Synaptic connection
         self.synapses = []		# List of Synapses
-        self.isVsynapes = 0		# Special rule in case the synapses is a V-synapses 
+        self.isVsynapes = 0		# Special rule in case the synapse is a V-synapses 
 
 class Synapses():
 
