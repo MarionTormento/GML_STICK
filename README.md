@@ -11,7 +11,7 @@ old versions folder: previous versions of the memory and inverted memory network
 
 # Useful vocabulary
 class Neuron():
-    def __init__(self, name):
+    def __init__(self, name
         super(Neuron, self).__init__()
         self.name = name
         self.V = 0				# Potential of the neuron at t
