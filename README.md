@@ -10,9 +10,11 @@ memory_v2.py: similar code for the memory network.
 old versions folder: previous versions of the memory and inverted memory networks, using only a neuron class (kept for personal information).
 
 # Useful vocabulary
-V = 0				# Potential of the neuron at t.
-spikeTime = []		# List of spiking time of the neuron.
+Class Neuron():
 
+        self.name = name 		# Name of the neuron
+        self.V = 0				# Potential of the neuron at t
+        self.spikeTime = []		# List of spiking time of the neuron
         self.actionTime = []	# List of instant t_i where the neuron potential should be updated
         self.updateRule = []	# List of dV_i to update the neuron potential from action time t_i to t_{i+1}
         self.nbSynapses = 0		# Number of Synaptic connection
@@ -20,8 +22,7 @@ spikeTime = []		# List of spiking time of the neuron.
         self.isVsynapes = 0		# Special rule in case the synapses is a V-synapses 
 
 class Synapses():
-    def __init__(self, syn, neuron, weight, time):
-        super(Synapses, self).__init__()
+
         self.type = syn  		# Type of synapses (V/ge/gf)
         self.post = neuron 		# Post-synaptic neuron
         self.W = weight 		# weight of the synapses
