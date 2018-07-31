@@ -45,7 +45,7 @@ class Neuron():
         if len(self.actionTime) < 2:
             pass
         else:
-            if t >= self.actionTime[1]:
+            if time >= self.actionTime[1]:
                 self.updateRule[0] += self.updateRule[1]
                 del self.updateRule[1], self.actionTime[0]
 
