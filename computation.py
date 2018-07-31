@@ -23,14 +23,14 @@ we = Vt*taum
 wi = -we
 dt = 1
 
-class Network():
+class Network(object):
     def __init__(self, name, Neuron1, Neuron2):
         super(Network, self).__init__()
         self.name = name
         self.input = Neuron1
         self.other = Neuron2
 
-class Neuron():
+class Neuron(object):
     def __init__(self, name):
         super(Neuron, self).__init__()
         self.name = name
@@ -67,7 +67,7 @@ class Neuron():
         for post in syn:
             self.synapses.append(Synapses(post[0], post[1], post[2], post[3]))
 
-class Synapses():
+class Synapses(object):
     def __init__(self, syn, neuron, weight, time):
         super(Synapses, self).__init__()
         self.type = syn
