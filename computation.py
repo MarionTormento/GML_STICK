@@ -143,7 +143,7 @@ def computation(network):
                     if neuron.isVsynapes == 1: # meaning its a V synapses
                         del neuron.updateRule[0], neuron.actionTime[0]
 
-                    if neuron.name == 'output' and len(neuron.spikeTime) == 2:
+                    if neuron.name[0:6] == 'output' and len(neuron.spikeTime) == 2:
                         print("Computation lasted for ", neuron.spikeTime[-1], "ms")
                         computationComplete = True
                         
@@ -172,6 +172,13 @@ def printResults(network):
         expectedResult = round(min(network.input[0].spikeTime[1]-network.input[0].spikeTime[0], network.input[1].spikeTime[1]-network.input[1].spikeTime[0]),2)
     elif network.name == "Maximum":
         expectedResult = round(max(network.input[0].spikeTime[1]-network.input[0].spikeTime[0], network.input[1].spikeTime[1]-network.input[1].spikeTime[0]),2)
-    obtainedResult = round(network.other[-1].spikeTime[1]-network.other[-1].spikeTime[0],2)
+    elif network.name == "Subtractor":
+        expectedResult = round(Tmin + abs(network.input[0].spikeTime[1]-network.input[1].spikeTime[1]),2)
+
+    try:
+        obtainedResult = round(network.other[-1].spikeTime[1]-network.other[-1].spikeTime[0],2)
+    except IndexError:
+        obtainedResult = round(network.other[-2].spikeTime[1]-network.other[-2].spikeTime[0],2)
+
     print("DTout - Result expected:", expectedResult, " / Result obtained with the network: ", obtainedResult)
     print("Error: ", round((expectedResult - obtainedResult)/expectedResult*100,2) )
