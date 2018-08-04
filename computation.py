@@ -5,6 +5,8 @@
 # Written by : Marion Tormento
 # July 2018
 # ____________________
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 # Constant
 Vt = 10 #mV
@@ -177,8 +179,48 @@ def printResults(network):
 
     try:
         obtainedResult = round(network.other[-1].spikeTime[1]-network.other[-1].spikeTime[0],2)
+        plotNetwork(network)
+        plotChronogram(network, network.other[-1].spikeTime[1])
+
     except IndexError:
         obtainedResult = round(network.other[-2].spikeTime[1]-network.other[-2].spikeTime[0],2)
+        plotNetwork(network)
+        plotChronogram(network, network.other[-2].spikeTime[1])
+
 
     print("DTout - Result expected:", expectedResult, " / Result obtained with the network: ", obtainedResult)
     print("Error: ", round((expectedResult - obtainedResult)/expectedResult*100,2) )
+
+def plotNetwork(network):
+    plt.figure(1)
+    title = network.name
+    title = title.replace(" ", "")
+    image = mpimg.imread("images/"+title+'.jpg')
+    plt.imshow(image)
+    plt.xticks([])
+    plt.yticks([])
+    plt.title(network.name + " network")
+
+def plotChronogram(network, compTime):
+    plt.figure(2)
+    nbPlot = len(network.input) + len(network.other)
+    fig = int(nbPlot*100+10)
+
+    for i in range(nbPlot):
+        fig += 1
+        plt.subplot(fig)
+
+        if i < len(network.input):
+            plt.hist(network.input[i].spikeTime, range=(0, compTime), rwidth=0.05)
+            # plt.xlabel('time (ms)')
+            plt.ylabel(network.input[i].name)
+            plt.yticks([])
+        else:
+            plt.hist(network.other[i-len(network.input)].spikeTime, range=(0, compTime), rwidth=0.05)
+            # plt.xlabel('time (ms)')
+            plt.ylabel(network.other[i-len(network.input)].name)
+            plt.yticks([])
+    plt.xlabel('time (ms)')
+    title = "Chonogram of the " + network.name + " network"
+    plt.suptitle(title)
+    plt.show()
